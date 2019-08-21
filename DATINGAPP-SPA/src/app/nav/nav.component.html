@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">DatingApp</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+      <a class="nav-link" href="#">Eşleşmeler</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Listeler</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Mesajlar</a>
+    </li>
+  </ul>
+
+  <div *ngIf="loggedIn()" class="dropdown">
+
+    <a class="dropdown-toggle text-light" href="#">
+      Hoşgeldiniz Kullanıcı
+    </a>
+
+
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#"><i class="fa fa-user"></i>Profili Düzenle</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Çıkış yap</a>
+    </div>
+  </div>
+
+
+  <form #loginForm="ngForm" *ngIf="!loggedIn()" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+    <input class="form-control mr-sm-2" type="text" name="username" placeholder="Username"
+      [(ngModel)]="loginModel.username" required #username="ngModel">
+    <input class="form-control mr-sm-2" type="password" name="password" placeholder="Password"
+      [(ngModel)]="loginModel.password" required #password="ngModel">
+    <button class="btn btn-success my-2 my-sm-0" type="submit" [disabled]="!loginForm.valid">Giriş Yap</button>
+  </form>
+
+</nav>
