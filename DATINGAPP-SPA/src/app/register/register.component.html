@@ -8,6 +8,13 @@
   </div>
 
   <div class="form-group">
+    <label for="favoriteValue">Sizin favori 'value' nedir?</label>
+    <select class="form-control" id="favoriteValue">
+      <option *ngFor="let value of valuesFromHome" [value]="value.id">{{value.name}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
     <input type="password" class="form-control" required name="password" [(ngModel)]="registerModel.password"
       placeholder="Şifre">
   </div>
