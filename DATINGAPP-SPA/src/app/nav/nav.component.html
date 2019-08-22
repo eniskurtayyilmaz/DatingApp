@@ -18,9 +18,9 @@
     </li>
   </ul>
 
-  <div *ngIf="loggedIn()" class="dropdown">
+  <div *ngIf="loggedIn()" class="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-    <a class="dropdown-toggle text-light" href="#">
+    <a class="dropdown-toggle text-light">
       Hoşgeldiniz Kullanıcı
     </a>
 
@@ -28,7 +28,7 @@
     <div class="dropdown-menu">
       <a class="dropdown-item" href="#"><i class="fa fa-user"></i>Profili Düzenle</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Çıkış yap</a>
+      <a class="dropdown-item" (click)="logout()">Çıkış yap</a>
     </div>
   </div>
 
@@ -40,9 +40,6 @@
       [(ngModel)]="loginModel.password" required #password="ngModel">
     <button class="btn btn-success my-2 my-sm-0" type="submit" [disabled]="!loginForm.valid">Giriş Yap</button>
   </form>
-
-
-
 
 
 </nav>
