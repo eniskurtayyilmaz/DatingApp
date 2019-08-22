@@ -31,6 +31,6 @@ export class AuthService {
 
 
   register(registerModel: any) {
-
+    return this.http.post(this.baseUrl + "register", registerModel);
   }
 }
