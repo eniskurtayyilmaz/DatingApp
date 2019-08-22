@@ -1,3 +1,27 @@
-<p>
-  register works!
-</p>
+<form #registerForm="ngForm" (ngSubmit)="register()">
+  <h2 class="text-center text-primary">Üye Ol</h2>
+  <hr>
+
+  <div class="form-group">
+    <input type="text" class="form-control" required name="username" [(ngModel)]="registerModel.username"
+      placeholder="Kullanıcı Adı">
+  </div>
+
+  <div class="form-group">
+    <label for="favoriteValue">Sizin favori 'value' nedir?</label>
+    <select class="form-control" id="favoriteValue">
+      <option *ngFor="let value of valuesFromHome" [value]="value.id">{{value.name}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <input type="password" class="form-control" required name="password" [(ngModel)]="registerModel.password"
+      placeholder="Şifre">
+  </div>
+
+  <div class="form-group text-center">
+    <button class="btn btn-success mr-2" type="submit">Kayıt Ol</button>
+    <button class="btn btn-default" type="button" (click)="cancel()">İptal</button>
+  </div>
+
+</form>

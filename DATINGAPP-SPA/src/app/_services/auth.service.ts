@@ -28,4 +28,9 @@ export class AuthService {
         })
       );
   }
+
+
+  register(registerModel: any) {
+
+  }
 }
