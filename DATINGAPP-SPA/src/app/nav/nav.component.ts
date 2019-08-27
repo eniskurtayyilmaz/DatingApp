@@ -21,7 +21,8 @@ export class NavComponent implements OnInit {
       // alert('login ok');
       console.log(next);
     }, error => {
-      alert('hatalı login');
+      alert(error);
+      console.log(error);
     });
   }
 
