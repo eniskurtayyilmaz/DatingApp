@@ -21,7 +21,7 @@
   <div *ngIf="loggedIn()" class="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
     <a class="dropdown-toggle text-light">
-      Hoşgeldiniz Kullanıcı
+      Hoşgeldiniz {{authService.decodedToken?.unique_name | titlecase}}
     </a>
 
 
