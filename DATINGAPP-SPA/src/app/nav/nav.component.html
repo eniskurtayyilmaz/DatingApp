@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-  <div class="container"><a class="navbar-brand" href="#">DatingApp</a>
+  <div class="container"><a class="navbar-brand" [routerLink]="['/home']"
+      routerLinkActive="router-link-active">DatingApp</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
       aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -7,14 +8,14 @@
 
 
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Eşleşmeler</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/member-list']">Eşleşmeler</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Listeler</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/lists']" routerLinkActive="router-link-active">Listeler</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Mesajlar</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/messages']" routerLinkActive="router-link-active">Mesajlar</a>
       </li>
     </ul>
 
