@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using AutoMapper;
 using DATINGAPP.API.Data;
 using DATINGAPP.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -32,10 +33,15 @@ namespace DATINGAPP.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDbContext<DataContext>(x =>
+                x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(opt =>
+                {
+                    opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
             services.AddCors();
+            services.AddAutoMapper(typeof(DatingRepository).Assembly);
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IDatingRepository, DatingRepository>();
@@ -45,7 +51,8 @@ namespace DATINGAPP.API
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            System.Text.Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
                         ValidateAudience = false,
                         ValidateIssuer = false
                     };
@@ -62,13 +69,12 @@ namespace DATINGAPP.API
             }
             else
             {
-
                 //Error handling
                 app.UseExceptionHandler(builder =>
                 {
                     builder.Run(async context =>
                     {
-                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
 
                         var error = context.Features.Get<IExceptionHandlerFeature>();
 
@@ -82,11 +88,11 @@ namespace DATINGAPP.API
                         {
                             errorMessage = "Something wrong that we do not know";
                         }
+
                         context.Response.AddApplicationError(errorMessage);
                         await context.Response.WriteAsync(errorMessage);
                     });
                 });
-
             }
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyOrigin().AllowAnyHeader());
